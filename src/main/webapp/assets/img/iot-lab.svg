@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Phòng Lab IoT">
+  <rect width="640" height="400" fill="#fef3c7"/>
+  <rect x="92" y="82" width="456" height="236" rx="30" fill="#ffffff"/>
+  <circle cx="208" cy="198" r="64" fill="#11615a"/>
+  <circle cx="208" cy="198" r="24" fill="#ffffff"/>
+  <circle cx="416" cy="150" r="34" fill="#c0362c"/>
+  <circle cx="454" cy="250" r="44" fill="#17212b"/>
+  <path d="M232 178l154-28M232 218l184 32" stroke="#667085" stroke-width="12" stroke-linecap="round"/>
+  <g fill="#11615a">
+    <circle cx="132" cy="118" r="12"/>
+    <circle cx="514" cy="114" r="12"/>
+    <circle cx="128" cy="286" r="12"/>
+    <circle cx="512" cy="288" r="12"/>
+  </g>
+</svg>

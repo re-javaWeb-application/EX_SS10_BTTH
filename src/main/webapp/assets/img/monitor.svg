@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Màn hình rời 24 inch">
+  <rect width="640" height="400" fill="#dbeafe"/>
+  <rect x="86" y="58" width="468" height="252" rx="22" fill="#17212b"/>
+  <rect x="112" y="84" width="416" height="194" rx="10" fill="#e8f3f1"/>
+  <path d="M154 234h126l54-76 62 48 48-60 42 88" fill="none" stroke="#11615a" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="276" y="310" width="88" height="34" fill="#667085"/>
+  <rect x="220" y="344" width="200" height="24" rx="12" fill="#344054"/>
+</svg>

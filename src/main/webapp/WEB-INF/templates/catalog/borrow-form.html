@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Đăng ký mượn')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: navbar}"></header>
+
+<main class="page form-page">
+    <section class="detail-header">
+        <img class="detail-image" th:src="@{${resource.imageUrl}}" th:alt="${resource.name}">
+        <div>
+            <p class="eyebrow" th:text="${resource.badgeText}">Thiết bị</p>
+            <h1 th:text="${resource.name}">Màn hình</h1>
+            <p th:text="${resource.description}">Mô tả</p>
+            <div class="inline-facts">
+                <span th:text="'Vị trí: ' + ${resource.location}">Vị trí</span>
+                <span th:text="'Số lượng còn lại: ' + ${resource.availableQuantity}">Còn 1</span>
+            </div>
+        </div>
+    </section>
+
+    <form class="form-panel"
+          method="post"
+          th:action="@{/resources/{id}/borrow(id=${resource.id})}"
+          th:object="${borrowRequest}">
+        <input type="hidden" th:field="*{itemId}">
+        <input type="hidden" th:if="${resource.lab}" th:field="*{quantity}">
+
+        <div class="form-grid">
+            <label>
+                <span>Họ và tên sinh viên</span>
+                <input type="text" th:field="*{studentName}" placeholder="Nguyễn Văn A">
+                <small class="field-error" th:if="${#fields.hasErrors('studentName')}" th:errors="*{studentName}"></small>
+            </label>
+
+            <label>
+                <span>Mã sinh viên</span>
+                <input type="text" th:field="*{studentCode}" placeholder="SV123456">
+                <small class="field-error" th:if="${#fields.hasErrors('studentCode')}" th:errors="*{studentCode}"></small>
+            </label>
+
+            <label>
+                <span>Email liên hệ</span>
+                <input type="email" th:field="*{email}" placeholder="sv123456@school.edu.vn">
+                <small class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+            </label>
+
+            <label th:if="${!resource.lab}">
+                <span>Số lượng muốn mượn</span>
+                <input type="number" min="1" th:field="*{quantity}">
+                <small class="field-error" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></small>
+            </label>
+
+            <label>
+                <span th:text="${resource.lab} ? 'Ngày sử dụng phòng' : 'Ngày dự kiến nhận'">Ngày nhận</span>
+                <input type="date" th:field="*{receiveDate}">
+                <small class="field-error" th:if="${#fields.hasErrors('receiveDate')}" th:errors="*{receiveDate}"></small>
+            </label>
+
+            <label>
+                <span>Ngày dự kiến trả</span>
+                <input type="date" th:field="*{returnDate}">
+                <small class="field-error" th:if="${#fields.hasErrors('returnDate')}" th:errors="*{returnDate}"></small>
+            </label>
+        </div>
+
+        <label class="full-width">
+            <span>Lý do mượn</span>
+            <textarea rows="5" th:field="*{reason}" placeholder="Ghi rõ môn học, nhóm hoặc mục đích sử dụng"></textarea>
+            <small class="field-error" th:if="${#fields.hasErrors('reason')}" th:errors="*{reason}"></small>
+        </label>
+
+        <div class="form-actions">
+            <a class="button secondary" th:href="@{/resources}">Quay lại</a>
+            <button class="button primary" type="submit">Gửi đăng ký</button>
+        </div>
+    </form>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

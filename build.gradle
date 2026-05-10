@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id 'war'
+    id 'org.gretty' version '5.0.2'
+}
+
+group 'com.re'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.13.2'
+    springVersion = '7.0.7'
+    thymeleafVersion = '3.1.4.RELEASE'
+    hibernateValidatorVersion = '9.1.0.Final'
+}
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    options.compilerArgs += ['-parameters']
+}
+
+dependencies {
+    compileOnly('jakarta.servlet:jakarta.servlet-api:6.1.0')
+
+    implementation("org.springframework:spring-webmvc:${springVersion}")
+    implementation("org.thymeleaf:thymeleaf-spring6:${thymeleafVersion}")
+    implementation("org.hibernate.validator:hibernate-validator:${hibernateValidatorVersion}")
+    implementation("org.glassfish.expressly:expressly:6.0.0")
+
+    testImplementation('jakarta.servlet:jakarta.servlet-api:6.1.0')
+    testImplementation("org.springframework:spring-test:${springVersion}")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+}
+
+test {
+    useJUnitPlatform()
+}
+
+gretty {
+    servletContainer = 'tomcat11'
+    contextPath = '/'
+    httpPort = project.hasProperty('httpPort') ? project.httpPort as int : 8080
+}

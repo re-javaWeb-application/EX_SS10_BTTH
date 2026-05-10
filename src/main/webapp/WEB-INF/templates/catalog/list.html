@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Danh mục mượn')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: navbar}"></header>
+
+<main class="page">
+    <section class="page-heading">
+        <div>
+            <p class="eyebrow">Sinh viên</p>
+            <h1>Danh mục thiết bị IT &amp; phòng Lab</h1>
+            <p>Chọn thiết bị hoặc phòng Lab đang có sẵn để gửi yêu cầu mượn trực tuyến.</p>
+        </div>
+    </section>
+
+    <div class="alert success" th:if="${successMessage}" th:text="${successMessage}"></div>
+
+    <section class="resource-grid" aria-label="Danh sách thiết bị và phòng Lab">
+        <article class="resource-card" th:each="resource : ${resources}">
+            <img class="resource-image" th:src="@{${resource.imageUrl}}" th:alt="${resource.name}">
+            <div class="resource-body">
+                <div class="resource-meta">
+                    <span class="badge" th:text="${resource.badgeText}">Thiết bị</span>
+                    <span class="stock" th:text="'Còn ' + ${resource.availableQuantity}">Còn 1</span>
+                </div>
+                <h2 th:text="${resource.name}">Tên thiết bị</h2>
+                <p class="location" th:text="${resource.location}">Kho A</p>
+                <p th:text="${resource.description}">Mô tả</p>
+                <a class="button primary" th:href="@{/resources/{id}/borrow(id=${resource.id})}">Đăng ký mượn</a>
+            </div>
+        </article>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title} + ' | IT Lab Portal'">IT Lab Portal</title>
+    <link rel="stylesheet" th:href="@{/assets/css/app.css}">
+</head>
+<body>
+<header class="topbar" th:fragment="navbar">
+    <a class="brand" th:href="@{/resources}">
+        <span class="brand-mark">IT</span>
+        <span>Lab Portal</span>
+    </a>
+    <nav class="nav-links">
+        <a th:href="@{/resources}">Sinh viên</a>
+        <a th:href="@{/admin/resources}">Quản lý danh mục</a>
+        <a th:href="@{/admin/requests}">Yêu cầu mượn</a>
+    </nav>
+</header>
+
+<footer class="footer" th:fragment="footer">
+    <span>Hệ thống Quản lý Mượn/Trả Thiết bị IT &amp; Phòng Lab</span>
+    <span>Spring Web MVC thuần + Thymeleaf</span>
+</footer>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Danh sách yêu cầu')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: navbar}"></header>
+
+<main class="page admin-page">
+    <section class="page-heading">
+        <div>
+            <p class="eyebrow">Lab Admin</p>
+            <h1>Danh sách yêu cầu mượn</h1>
+            <p>Thông tin sinh viên đăng ký để quản lý Lab chuẩn bị thiết bị hoặc phòng.</p>
+        </div>
+    </section>
+
+    <div class="empty-state" th:if="${#lists.isEmpty(requests)}">
+        Chưa có yêu cầu mượn nào.
+    </div>
+
+    <section class="request-list" th:if="${!#lists.isEmpty(requests)}">
+        <article class="request-item" th:each="request : ${requests}">
+            <div>
+                <span class="badge" th:text="${request.itemType.label}">Thiết bị</span>
+                <h2 th:text="${request.itemName}">Tên thiết bị</h2>
+                <p th:text="${request.reason}">Lý do</p>
+            </div>
+            <dl>
+                <div>
+                    <dt>Sinh viên</dt>
+                    <dd th:text="${request.studentName} + ' - ' + ${request.studentCode}">SV</dd>
+                </div>
+                <div>
+                    <dt>Email</dt>
+                    <dd th:text="${request.email}">email</dd>
+                </div>
+                <div>
+                    <dt>Số lượng</dt>
+                    <dd th:text="${request.quantity}">1</dd>
+                </div>
+                <div>
+                    <dt>Thời gian</dt>
+                    <dd th:text="${#temporals.format(request.receiveDate, 'dd/MM/yyyy')} + ' - ' + ${#temporals.format(request.returnDate, 'dd/MM/yyyy')}">Ngày</dd>
+                </div>
+                <div>
+                    <dt>Trạng thái</dt>
+                    <dd th:text="${request.status.label}">Chờ</dd>
+                </div>
+            </dl>
+        </article>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

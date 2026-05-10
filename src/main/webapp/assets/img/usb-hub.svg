@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Hub USB-C đa cổng">
+  <rect width="640" height="400" fill="#ecfeff"/>
+  <rect x="142" y="130" width="356" height="162" rx="34" fill="#11615a"/>
+  <rect x="176" y="170" width="74" height="34" rx="8" fill="#ffffff"/>
+  <rect x="278" y="170" width="84" height="34" rx="8" fill="#ffffff"/>
+  <circle cx="428" cy="188" r="26" fill="#ffffff"/>
+  <path d="M498 210c58 4 88-18 88-64 0-42-32-68-82-68h-38" fill="none" stroke="#17212b" stroke-width="20" stroke-linecap="round"/>
+  <rect x="82" y="184" width="84" height="54" rx="12" fill="#c0362c"/>
+  <path d="M166 211h-42" stroke="#ffffff" stroke-width="12" stroke-linecap="round"/>
+</svg>

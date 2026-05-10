@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Quản lý danh mục')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: navbar}"></header>
+
+<main class="page admin-page">
+    <section class="page-heading">
+        <div>
+            <p class="eyebrow">Lab Admin</p>
+            <h1>Quản lý danh sách thiết bị và phòng Lab</h1>
+            <p>Theo dõi tồn kho, vị trí lưu trữ và thêm danh mục mới khi cần.</p>
+        </div>
+    </section>
+
+    <div class="alert success" th:if="${successMessage}" th:text="${successMessage}"></div>
+
+    <section class="admin-layout">
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>Tên</th>
+                    <th>Loại</th>
+                    <th>Vị trí</th>
+                    <th>Còn lại</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="resource : ${resources}">
+                    <td>
+                        <strong th:text="${resource.name}">Tên</strong>
+                        <span class="muted" th:text="${resource.description}">Mô tả</span>
+                    </td>
+                    <td th:text="${resource.type.label}">Thiết bị</td>
+                    <td th:text="${resource.location}">Kho</td>
+                    <td th:text="${resource.availableQuantity}">1</td>
+                    <td>
+                        <form method="post" th:action="@{/admin/resources/{id}/restore(id=${resource.id})}">
+                            <button class="icon-button" type="submit" title="Khôi phục số lượng mặc định">↻</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <form class="form-panel compact"
+              method="post"
+              th:action="@{/admin/resources}"
+              th:object="${resourceForm}">
+            <h2>Thêm danh mục</h2>
+
+            <label>
+                <span>Tên danh mục</span>
+                <input type="text" th:field="*{name}" placeholder="Máy chiếu mini">
+                <small class="field-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
+            </label>
+
+            <label>
+                <span>Loại</span>
+                <select th:field="*{type}">
+                    <option th:each="type : ${T(com.re.btss10.model.ResourceType).values()}"
+                            th:value="${type}"
+                            th:text="${type.label}"></option>
+                </select>
+                <small class="field-error" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></small>
+            </label>
+
+            <label>
+                <span>Đường dẫn hình ảnh</span>
+                <input type="text" th:field="*{imageUrl}" placeholder="/assets/img/monitor.svg">
+                <small class="field-error" th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"></small>
+            </label>
+
+            <label>
+                <span>Số lượng còn lại</span>
+                <input type="number" min="1" th:field="*{availableQuantity}">
+                <small class="field-error" th:if="${#fields.hasErrors('availableQuantity')}" th:errors="*{availableQuantity}"></small>
+            </label>
+
+            <label>
+                <span>Vị trí</span>
+                <input type="text" th:field="*{location}" placeholder="Kho A - Tủ 04">
+                <small class="field-error" th:if="${#fields.hasErrors('location')}" th:errors="*{location}"></small>
+            </label>
+
+            <label>
+                <span>Mô tả</span>
+                <textarea rows="4" th:field="*{description}" placeholder="Mô tả ngắn để sinh viên dễ chọn"></textarea>
+                <small class="field-error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></small>
+            </label>
+
+            <button class="button primary" type="submit">Thêm danh mục</button>
+        </form>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>
